@@ -1,18 +1,5 @@
+from input_helper import input_user_bool
 
-def ask_user_bool(prompt:str) -> bool:
-    "Query user input: yes or no and returns bool."
-    done: bool = False
-    while not done: # end by return
-        user_input = input(prompt + " (J/N) ").upper()
-        if user_input == "N":
-            result = False
-            done = True
-        elif user_input == "J":
-            result = True
-            done = True
-        else:
-            print("Bitte J oder N eingeben! ")
-    return result
 
 def invoice():
     total: float = 0.0
@@ -24,7 +11,7 @@ def invoice():
         price: float = float(input("Preis: "))
         total = total + count * price
 
-        done = ask_user_bool("Eingabe beenden?")
+        done = input_user_bool("Eingabe beenden?")
 
     tax_rate = 0.19
     tax = total * tax_rate
@@ -43,4 +30,4 @@ def invoice():
 new_invoice = True
 while new_invoice:
     invoice()
-    new_invoice = ask_user_bool("Weitere Rechnung?")
+    new_invoice = input_user_bool("Weitere Rechnung?")

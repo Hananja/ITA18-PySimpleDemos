@@ -4,7 +4,7 @@
 # sind diese in eine andere Datei ausgelagert (siehe input_helper.py).
 # Sie können in diesem Programm verwendet werden, wenn die Datei sich im
 # gleichen Verzeichnis befindet und die Unterprogramme hier importiert werden.
-from input_helper import input_number, input_user_bool
+from input_helper import input_user_bool, input_number
 
 # Mögliche Aufteilung:
 # - Preisberechung
@@ -58,20 +58,20 @@ def main():
     # zu den Unterprogrammen: siehe Kommentar oben
 
     # input
-    count = input_number("Anzahl: ", False)
-    distance = input_number("Entfernung: ", True)
-    is_express = input_user_bool("Schnellexpress?")
+    count          = input_number("Anzahl: ", False)
+    distance       = input_number("Entfernung: ", True)
+    is_express     = input_user_bool("Schnellexpress?")
     do_reservation = input_user_bool("Reservierung?")
-    is_night_ride = input_user_bool("Nachtfahrt?")
+    is_night_ride  = input_user_bool("Nachtfahrt?")
 
     # single price calculation
-    single_price = get_price(distance)
+    single_price  = get_price(distance)
     single_price += get_additions(is_express, do_reservation)
     single_price -= get_discounts(is_night_ride, single_price)
 
     # final and tax calculation
-    net = count * single_price
-    tax = net * tax_rate
+    net   = count * single_price
+    tax   = net * tax_rate
     gross = net + tax
 
     # output

@@ -86,17 +86,18 @@ def run_histogram():
 
 
 def get_prime_list(num: int) -> List[int]:
+    """ Liste aller Primzahlen bis zu einem angegebenen Wert """
     for i in range(2, num + 1):
         is_prime = True # vorbesetzt: Annahme: ist eine Primzahl
-        for d in range(2, int(i / 2) + 1):
-            if i % d == 0:
-                is_prime = False
+        for devisor in range(2, int(i / 2) + 1):
+            if i % devisor == 0:
+                is_prime = False # doch teilbar
                 break
         if is_prime:
             yield i
 
 
-# Aufgabe 1 e
+# Aufgabe 1 e (für Experten)
 def get_primes(num: int):
     if num <= 1:
         return []

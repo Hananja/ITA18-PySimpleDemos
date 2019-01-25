@@ -47,21 +47,21 @@ def run_count_in_iterable():
 def calc_product_list(data: List[List[int]]) -> int:
     product = 1
     for item in data:
-        for i in range(item[1]):
-            product *= item[0]
+        # item ist eine Liste mit zwei Elementen: item[0] Basis, item[1] Exponent
+        product *= item[0] ** item[1] # ** ist "hoch"
     return product
 
 
-def run_calc_produrct_list():
+def run_calc_product_list():
     print(calc_product_list([[2, 2], [3, 1], [5, 0], [7, 1]]))
 
 
 # Aufgabe 1 d
 def calc_histogramm(data: List[Any]):
-    done_items = []
-    result = []
+    done_items = [] # Basiswerte, die bereits bearbeitet wurden
+    result = []     # Zwischenspeicher für die Rückgabe
     for item in data:
-        if item not in done_items:
+        if item not in done_items: # Wurde das item schon behandelt? Nein!
             # FIXME: hoch null fehlt noch
             done_items.append(item)
             result.append([item, data.count(item)])
@@ -69,11 +69,9 @@ def calc_histogramm(data: List[Any]):
 
 
 def calc_full_histogram(data: List[Any], values: List[Any]):
-    done_values = []
     for v in values:
-        if v not in done_values:
-            done_values.append(v)
-            yield [v, data.count(v)]
+        yield [v, data.count(v)]
+
 
 
 def calc_prime_histogram(data: List[int]) -> List[List[int]]:
@@ -84,14 +82,13 @@ def calc_prime_histogram(data: List[int]) -> List[List[int]]:
 def run_histogram():
     mylist = [2, 2, 3, 3, 7, 2, 7, 13]
     print(calc_histogramm(mylist))
-    print(list(calc_prime_histogram(mylist)))
+    print(calc_prime_histogram(mylist))
 
 
-# Aufgabe 1 e
 def get_prime_list(num: int) -> List[int]:
     for i in range(2, num + 1):
-        is_prime = True
-        for d in range(2, int(i / 2)):
+        is_prime = True # vorbesetzt: Annahme: ist eine Primzahl
+        for d in range(2, int(i / 2) + 1):
             if i % d == 0:
                 is_prime = False
                 break
@@ -99,13 +96,23 @@ def get_prime_list(num: int) -> List[int]:
             yield i
 
 
+# Aufgabe 1 e
+def get_primes(num: int):
+    if num <= 1:
+        return []
+    else:
+        for d in range(2, num + 1):
+            if num % d == 0:
+                return [d] + get_primes(int(num / d)) # Rekursion
+
+
 def run_get_prime_list():
-    print(get_prime_list(84))
+    print(get_primes(84))
 
 
 # Hauptprogramm(e)
 # run_demo_prime_numbers()
 # run_count_in_iterable()
-run_calc_produrct_list()
+# run_calc_product_list()
 # run_histogram()
-# run_get_prime_list()
+run_get_prime_list()

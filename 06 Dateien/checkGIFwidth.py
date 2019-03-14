@@ -23,5 +23,11 @@ with open("smiley.gif", "rb") as infile:
     else:
         print("kein GIF File")
 
-    # Breite bestimmen
-    # TODO
+    # Breite und Höhe bestimmen
+    infile.seek(6) # Position 6 anwählen (Cursor setzen)
+    width_data = infile.read(2) # 2 Bytes lesen
+    width = width_data[0] + width_data[1] * 256
+    print("Breite:", width)
+    height_data = infile.read(2)
+    height = height_data[0] + 256 * height_data[1]
+    print("Höhe: ", height)
